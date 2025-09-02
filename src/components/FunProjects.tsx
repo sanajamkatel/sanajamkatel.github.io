@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Clock, Heart, ArrowLeft } from 'lucide-react';
+import { Sparkles, Clock, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Footer from './Footer';
 

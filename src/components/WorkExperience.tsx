@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Calendar, MapPin, ExternalLink, ArrowRight, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
-import ScrollButton from './ScrollButton';
+
 
 const WorkExperience: React.FC = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -155,7 +155,7 @@ const WorkExperience: React.FC = () => {
     return () => {
       Object.values(intervals).forEach(interval => clearInterval(interval));
     };
-  }, [filteredExperience]);
+  }, [filteredExperience, workExperience]);
 
   return (
     <section id="work-experience" className="section-padding bg-gray-50 relative">

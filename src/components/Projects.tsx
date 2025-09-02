@@ -14,10 +14,10 @@ const Projects: React.FC = () => {
       title: 'Medical Recommendation System',
       description: 'Developed a healthcare-focused system predicting diseases based on symptoms using ML models that predicts diseases based on symptoms and suggests treatments using machine learning models such as SVC, Random Forest, and Gradient Boosting. Built and deployed RESTful APIs with Flask for backend processing and designed a responsive web interface and AI-powered symptom matching and Google Search API to fetch up-to-date treatment suggestions.',
       images: [
-        '/projects/ML/careconnect%20cover.png',
-        '/projects/ML/careconnect-1st.png',
-        '/projects/ML/careconnect1st.png',
-        '/projects/ML/careconnect%20cover1.png'
+        process.env.PUBLIC_URL + '/projects/ML/careconnect%20cover.png',
+        process.env.PUBLIC_URL + '/projects/ML/careconnect-1st.png',
+        process.env.PUBLIC_URL + '/projects/ML/careconnect1st.png',
+        process.env.PUBLIC_URL + '/projects/ML/careconnect%20cover1.png'
       ],
       technologies: ['Python', 'Machine Learning', 'Flask', 'SVC', 'Random Forest', 'Gradient Boosting', 'Google Search API', 'RESTful APIs'],
       category: 'ai',
@@ -30,9 +30,9 @@ const Projects: React.FC = () => {
       title: 'Twitter Clone',
       description: 'Developed a full-stack Twitter clone designed for good user experience that supports user authentication, tweet posting, and social interactions like following/unfollowing, using technologies such as React, Vite, Node.js, Express.js, MongoDB, and Cloudinary. Designed and implemented RESTful APIs for secure user authentication, profile management, and data storage, utilizing JWT for token-based authentication, bcrypt for password encryption, and custom middleware for efficient routing.',
       images: [
-        '/projects/twitter/cover.png',
-        '/projects/twitter/dashboard.png',
-        '/projects/twitter/posts.png'
+        process.env.PUBLIC_URL + '/projects/twitter/cover.png',
+        process.env.PUBLIC_URL + '/projects/twitter/dashboard.png',
+        process.env.PUBLIC_URL + '/projects/twitter/posts.png'
       ],
       technologies: ['React', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'Cloudinary', 'JWT', 'bcrypt', 'RESTful APIs'],
       category: 'web',

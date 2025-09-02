@@ -57,7 +57,7 @@ const ScrollButton: React.FC<ScrollButtonProps> = ({
         {/* Main avocado circle */}
         <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-hot-pink to-primary-dark rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-110 border-2 border-white">
           <img
-            src="/avacado.png"
+            src={process.env.PUBLIC_URL + "/avacado.png"}
             alt="Scroll"
             className="w-8 h-8 sm:w-10 sm:h-10 filter brightness-0 invert drop-shadow-sm"
           />

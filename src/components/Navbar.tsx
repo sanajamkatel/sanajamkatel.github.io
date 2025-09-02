@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
           >
             <Link to="/">
               <img 
-                src="/avacado.png" 
+                src={process.env.PUBLIC_URL + "/avacado.png"} 
                 alt="Sana Portfolio Logo" 
                 className="h-10 w-auto"
               />

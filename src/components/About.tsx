@@ -190,7 +190,7 @@ const About: React.FC = () => {
                   <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
                     {/* Profile Photo */}
                     <img
-                      src="/profilepic.JPEG"
+                      src={process.env.PUBLIC_URL + "/profilepic.JPEG"}
                       alt="Sadhana Jamkatel"
                       className="w-60 h-60 rounded-full object-cover"
                     />

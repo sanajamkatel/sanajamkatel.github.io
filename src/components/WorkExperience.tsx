@@ -25,11 +25,11 @@ const WorkExperience: React.FC = () => {
                 'Automated CLI doc publishing using OCLIF\'s markdown generator and GitHub Actions, removing the need for manual updates and keeping docs accurate with every release'
               ],
               images: [
-                { src: '/aeropay/screenshot.png', alt: 'Documentation Site', type: 'Website' },
-                { src: '/aeropay/aeropay1.png', alt: 'Interns' },
-                { src: '/aeropay/2.png', alt: 'Build a Bear'},
-                { src: '/aeropay/IMG_9274.jpg', alt: 'Service Day '},
-                { src: '/aeropay/IMG_5240 2.png', alt: 'First Day' }
+                { src: process.env.PUBLIC_URL + '/aeropay/screenshot.png', alt: 'Documentation Site', type: 'Website' },
+                { src: process.env.PUBLIC_URL + '/aeropay/aeropay1.png', alt: 'Interns' },
+                { src: process.env.PUBLIC_URL + '/aeropay/2.png', alt: 'Build a Bear'},
+                { src: process.env.PUBLIC_URL + '/aeropay/IMG_9274.jpg', alt: 'Service Day '},
+                { src: process.env.PUBLIC_URL + '/aeropay/IMG_5240 2.png', alt: 'First Day' }
               ],
               link: null
             },
@@ -48,11 +48,11 @@ const WorkExperience: React.FC = () => {
                 'Collaborated on a team project to build an interactive HPC chatbot, using both RAG-based and non-RAG approaches with LangChain and Gemini'
               ],
               images: [
-                { src: '/argonne/IMG_8658 2.jpg', alt: 'Argonne Bootcamp', type: 'Bootcamp' },
-                { src: '/argonne/1.png', alt: 'Aurora Systems', type: 'System' },
-                { src: '/argonne/2.png', alt: 'Supercomputing Session', type: 'Learning' },
-                { src: '/argonne/3.png', alt: 'HPC Workshop', type: 'Workshop' },
-                { src: '/argonne/4.png', alt: 'Advanced HPC', type: 'Advanced' }
+                { src: process.env.PUBLIC_URL + '/argonne/IMG_8658 2.jpg', alt: 'Argonne Bootcamp', type: 'Bootcamp' },
+                { src: process.env.PUBLIC_URL + '/argonne/1.png', alt: 'Aurora Systems', type: 'System' },
+                { src: process.env.PUBLIC_URL + '/argonne/2.png', alt: 'Supercomputing Session', type: 'Learning' },
+                { src: process.env.PUBLIC_URL + '/argonne/3.png', alt: 'HPC Workshop', type: 'Workshop' },
+                { src: process.env.PUBLIC_URL + '/argonne/4.png', alt: 'Advanced HPC', type: 'Advanced' }
               ],
               link: null
             },
@@ -89,7 +89,7 @@ const WorkExperience: React.FC = () => {
                 'Implement advanced analytics dashboard for donation tracking'
               ],
               images: [
-                { src: '/safari-website.png', alt: 'Safari Strive Website', type: 'Website' }
+                { src: process.env.PUBLIC_URL + '/safari-website.png', alt: 'Safari Strive Website', type: 'Website' }
               ],
               link: null
             }

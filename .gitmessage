@@ -1,0 +1,31 @@
+# Conventional Commits
+# Format: <type>(<scope>): <description>
+#
+# Types:
+#   feat     - New feature
+#   fix      - Bug fix
+#   docs     - Documentation changes
+#   style    - Code style changes (formatting, missing semicolons, etc)
+#   refactor - Code refactoring
+#   test     - Adding or updating tests
+#   chore    - Maintenance tasks
+#   perf     - Performance improvements
+#   ci       - CI/CD changes
+#   build    - Build system changes
+#   revert   - Revert previous commit
+#
+# Examples:
+#   feat: add new contact form validation
+#   fix(navbar): resolve mobile menu toggle issue
+#   docs: update README with deployment instructions
+#   style: format code with prettier
+#   refactor: simplify component logic
+#   test: add unit tests for utility functions
+#   chore: update dependencies
+#   perf: optimize image loading
+#   ci: add GitHub Actions workflow
+#   build: configure webpack optimization
+#   revert: revert to previous stable version
+#
+# Scope is optional but recommended for clarity
+# Description should be in present tense and concise 

@@ -4,12 +4,14 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  # Build and deploy
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,16 +29,6 @@ jobs:
         run: npm run build
       
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: actions/deploy-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          force_orphan: true
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-          commit_message: 'Deploy portfolio to GitHub Pages'
-      
-      - name: Update deployment status
-        run: |
-          echo " Portfolio deployed successfully!"
-          echo "Live at: https://sadhanajx10.github.io/sana-portfolio" 
+          path: ./build 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -55,7 +55,7 @@ const Projects: React.FC = () => {
     ? projects 
     : projects.filter(project => project.category === activeFilter);
 
-  const nextImage = (projectId: number) => {
+  const nextImage = useCallback((projectId: number) => {
     const project = projects.find(p => p.id === projectId);
     if (project) {
       setCurrentImageIndex(prev => ({
@@ -63,9 +63,9 @@ const Projects: React.FC = () => {
         [projectId]: ((prev[projectId] || 0) + 1) % project.images.length
       }));
     }
-  };
+  }, [projects]);
 
-  const prevImage = (projectId: number) => {
+  const prevImage = useCallback((projectId: number) => {
     const project = projects.find(p => p.id === projectId);
     if (project) {
       setCurrentImageIndex(prev => ({
@@ -73,7 +73,7 @@ const Projects: React.FC = () => {
         [projectId]: prev[projectId] === 0 ? project.images.length - 1 : (prev[projectId] || 0) - 1
       }));
     }
-  };
+  }, [projects]);
 
   // Auto-slide carousel every 5 seconds
   useEffect(() => {

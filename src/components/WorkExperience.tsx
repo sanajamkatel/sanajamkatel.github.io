@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Calendar, MapPin, ExternalLink, ArrowRight, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -8,7 +8,7 @@ const WorkExperience: React.FC = () => {
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: string]: number }>({});
 
-  const workExperience = [
+  const workExperience = useMemo(() => [
             {
               id: 'aeropay',
               title: 'DevOps Engineer Intern',
@@ -93,7 +93,7 @@ const WorkExperience: React.FC = () => {
               ],
               link: null
             }
-          ];
+          ], []);
 
   const tabs = [
     { id: 'all', label: 'All Experience' },
@@ -110,7 +110,7 @@ const WorkExperience: React.FC = () => {
   console.log('🔍 Filtered experience count:', filteredExperience.length);
   console.log('🔍 Filtered experience:', filteredExperience);
 
-  const nextImage = (jobId: string) => {
+  const nextImage = useCallback((jobId: string) => {
     const job = workExperience.find(j => j.id === jobId);
     if (job && job.images) {
       setCurrentImageIndex(prev => ({
@@ -118,9 +118,9 @@ const WorkExperience: React.FC = () => {
         [jobId]: ((prev[jobId] || 0) + 1) % job.images.length
       }));
     }
-  };
+  }, [workExperience]);
 
-  const prevImage = (jobId: string) => {
+  const prevImage = useCallback((jobId: string) => {
     const job = workExperience.find(j => j.id === jobId);
     if (job && job.images) {
       setCurrentImageIndex(prev => ({
@@ -128,7 +128,7 @@ const WorkExperience: React.FC = () => {
         [jobId]: prev[jobId] === 0 ? job.images.length - 1 : (prev[jobId] || 0) - 1
       }));
     }
-  };
+  }, [workExperience]);
 
   // Auto-slide effect
   useEffect(() => {

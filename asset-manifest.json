@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/sana-portfolio/static/css/main.32211b60.css",
-    "main.js": "/sana-portfolio/static/js/main.fb9b417c.js",
-    "static/js/453.0ca47570.chunk.js": "/sana-portfolio/static/js/453.0ca47570.chunk.js",
-    "index.html": "/sana-portfolio/index.html",
-    "main.32211b60.css.map": "/sana-portfolio/static/css/main.32211b60.css.map",
-    "main.fb9b417c.js.map": "/sana-portfolio/static/js/main.fb9b417c.js.map",
-    "453.0ca47570.chunk.js.map": "/sana-portfolio/static/js/453.0ca47570.chunk.js.map"
+    "main.css": "/static/css/main.32211b60.css",
+    "main.js": "/static/js/main.51ae0b6d.js",
+    "static/js/453.0ca47570.chunk.js": "/static/js/453.0ca47570.chunk.js",
+    "index.html": "/index.html",
+    "main.32211b60.css.map": "/static/css/main.32211b60.css.map",
+    "main.51ae0b6d.js.map": "/static/js/main.51ae0b6d.js.map",
+    "453.0ca47570.chunk.js.map": "/static/js/453.0ca47570.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.32211b60.css",
-    "static/js/main.fb9b417c.js"
+    "static/js/main.51ae0b6d.js"
   ]
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -8,7 +8,7 @@ const Projects: React.FC = () => {
 
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
 
-  const projects = [
+  const projects = useMemo(() => [
     {
       id: 1,
       title: 'Medical Recommendation System',
@@ -40,16 +40,16 @@ const Projects: React.FC = () => {
       featured: true,
       period: 'May 2024 - Dec 2024'
     }
-  ];
+  ], []);
 
-  const filters = [
+  const filters = useMemo(() => [
     { id: 'all', label: 'All Projects' },
     { id: 'web', label: 'Web Development' },
     { id: 'ai', label: 'AI & ML' },
     { id: 'mobile', label: 'Mobile Apps' },
     { id: 'game', label: 'Games' },
     { id: 'data', label: 'Data Science' }
-  ];
+  ], []);
 
   const filteredProjects = activeFilter === 'all' 
     ? projects 

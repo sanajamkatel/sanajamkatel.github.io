@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Github, ChevronLeft, ChevronRight } from 'lucide-react';
-import ScrollButton from './ScrollButton';
+
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -84,7 +84,7 @@ const Projects: React.FC = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [filteredProjects]);
+  }, [filteredProjects, nextImage]);
 
   return (
     <section id="projects" className="section-padding bg-gray-50 relative">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Music, Palette, Gamepad2, BookOpen, Camera, Heart, Star } from 'lucide-react';
-import ScrollButton from './ScrollButton';
+
 
 const Interests: React.FC = () => {
   const interests = [

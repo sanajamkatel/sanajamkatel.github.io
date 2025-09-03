@@ -2,7 +2,6 @@
   "name": "sana_portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sadhanajx10.github.io/sana-portfolio",
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@testing-library/dom": "^10.4.1",
@@ -25,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:gh-pages": "PUBLIC_URL=/sana-portfolio react-scripts build",
+    "build:gh-pages": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

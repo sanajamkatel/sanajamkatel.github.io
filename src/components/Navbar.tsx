@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
@@ -39,6 +40,12 @@ const Navbar: React.FC = () => {
     setCloseTimeout(timeout);
   };
 
+  // Close mobile menu when route changes
+  React.useEffect(() => {
+    setIsOpen(false);
+    setIsProjectsDropdownOpen(false);
+  }, [location.pathname]);
+
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -52,6 +59,28 @@ const Navbar: React.FC = () => {
     { name: 'Main Projects', path: '/projects' },
     { name: 'Fun Projects', path: '/fun-projects', external: true },
   ];
+
+  const handleMobileProjectsClick = () => {
+    console.log('Mobile Projects clicked! Current state:', isProjectsDropdownOpen); // Debug log
+    setIsProjectsDropdownOpen(!isProjectsDropdownOpen);
+    console.log('New state will be:', !isProjectsDropdownOpen); // Debug log
+  };
+
+  const handleMobileItemClick = (path: string, external: boolean = false) => {
+    console.log('Mobile item clicked:', path, 'external:', external); // Debug log
+    
+    if (external) {
+      // For external links, open in new tab
+      window.open(path, '_blank', 'noopener,noreferrer');
+    } else {
+      // For internal links, navigate and close mobile menu
+      console.log('Navigating to:', path); // Debug log
+      navigate(path);
+    }
+    // Always close mobile menu and dropdown
+    setIsOpen(false);
+    setIsProjectsDropdownOpen(false);
+  };
 
   return (
     <motion.nav
@@ -179,7 +208,7 @@ const Navbar: React.FC = () => {
                   {item.hasDropdown ? (
                     <div>
                       <button
-                        onClick={() => setIsProjectsDropdownOpen(!isProjectsDropdownOpen)}
+                        onClick={handleMobileProjectsClick}
                         className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 flex items-center justify-between"
                       >
                         <span>{item.name}</span>
@@ -194,8 +223,11 @@ const Navbar: React.FC = () => {
                                 href={dropdownItem.path}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block px-3 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 text-sm"
-                                onClick={() => setIsOpen(false)}
+                                className="block w-full text-left px-3 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 text-sm"
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  setIsProjectsDropdownOpen(false);
+                                }}
                               >
                                 {dropdownItem.name}
                               </a>
@@ -203,8 +235,11 @@ const Navbar: React.FC = () => {
                               <Link
                                 key={dropdownItem.name}
                                 to={dropdownItem.path}
-                                className="block px-3 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 text-sm"
-                                onClick={() => setIsOpen(false)}
+                                className="block w-full text-left px-3 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 text-sm"
+                                onClick={() => {
+                                  setIsOpen(false);
+                                  setIsProjectsDropdownOpen(false);
+                                }}
                               >
                                 {dropdownItem.name}
                               </Link>
@@ -217,7 +252,7 @@ const Navbar: React.FC = () => {
                     <Link
                       to={item.path}
                       className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300"
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => handleMobileItemClick(item.path)}
                     >
                       {item.name}
                     </Link>

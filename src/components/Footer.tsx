@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
             className="text-center md:text-left mb-4 md:mb-0"
           >
             <p className="text-pink-700 text-sm font-medium">
-              © 2025 Sana. All rights reserved.
+              © 2025 SanaCodes. All rights reserved.
             </p>
           </motion.div>
 
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
             <p className="text-pink-700 text-sm font-medium flex items-center justify-center md:justify-end space-x-1">
               <span>Made with</span>
               <Heart size={14} className="text-pink-500 animate-pulse" />
-              <span>by Sana</span>
+              <span>by SanaCodes</span>
             </p>
           </motion.div>
         </div>

@@ -33,10 +33,10 @@ This project represents my journey in modern web development and showcases my ab
 ### For Developers & Students
 ```bash
 # Clone for learning purposes
-git clone https://github.com/Sadhanajx10/sana-portfolio.git
+git clone https://github.com/sanajamkatel/sanajamkatel.github.io.git
 
 # Navigate to project directory
-cd sana-portfolio
+cd sanajamkatel.github.io
 
 # Install dependencies
 npm install
@@ -101,7 +101,7 @@ The project uses GitHub Actions for professional, automated deployment:
 
 1. **Push to main branch** - automatically triggers build and deployment
 2. **GitHub Actions** - validates commits, builds project, and deploys to GitHub Pages
-3. **Live Portfolio**: https://sadhanajx10.github.io/sana-portfolio
+3. **Live Portfolio**: https://sanajamkatel.github.io
 
 ### Deployment Options
 ```bash
@@ -176,7 +176,6 @@ This project is open source and available under the [MIT License](LICENSE) for e
 
 **Sadhana Jamkatel (Sana)**
 - **Computer Science Student** at North Central College
-- **Creative Developer** with a passion for innovative design and user experience
 - **Mentorship Advocate** committed to inclusive tech and supporting underrepresented developers
 - **Open to Opportunities** in DevOps, Software Engineering, and Creative Development roles
 

@@ -21,7 +21,7 @@ const Projects: React.FC = () => {
       ],
       technologies: ['Python', 'Machine Learning', 'Flask', 'SVC', 'Random Forest', 'Gradient Boosting', 'Google Search API', 'RESTful APIs'],
       category: 'ai',
-      github: 'https://github.com/Sadhanajx10',
+      github: 'https://github.com/sanajamkatel/End-to-End-Medical-Recommendation-System',
       featured: true,
       period: 'Jan 2025 - Feb 2025'
     },
@@ -36,7 +36,7 @@ const Projects: React.FC = () => {
       ],
       technologies: ['React', 'Vite', 'Node.js', 'Express.js', 'MongoDB', 'Cloudinary', 'JWT', 'bcrypt', 'RESTful APIs'],
       category: 'web',
-      github: 'https://github.com/Sadhanajx10',
+      github: 'https://github.com/sanajamkatel/twitter-clone',
       featured: true,
       period: 'May 2024 - Dec 2024'
     }

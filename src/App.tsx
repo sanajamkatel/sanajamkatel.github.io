@@ -5,7 +5,6 @@ import Home from './pages/Home';
 import AboutPage from './pages/About';
 import ExperiencePage from './pages/Experience';
 import ProjectsPage from './pages/Projects';
-import FunProjects from './components/FunProjects';
 import InterestsPage from './pages/Interests';
 import ContactPage from './pages/Contact';
 
@@ -19,7 +18,6 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/fun-projects" element={<FunProjects />} />
           <Route path="/interests" element={<InterestsPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>

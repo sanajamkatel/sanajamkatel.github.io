@@ -55,16 +55,28 @@ const Projects: React.FC = () => {
       github: 'https://github.com/sanajamkatel/twitter-clone',
       featured: true,
       period: 'May 2024 - Dec 2024'
+    },
+    {
+      id: 4,
+      title: 'Tic-Tac-Toe Game',
+      description: 'Developed two implementations of Tic-Tac-Toe showcasing different programming paradigms: a C++ console version with object-oriented design and a C++ web server with HTML frontend. The console version features 2D array board representation, input validation, and comprehensive win detection. The web server version includes a C++ backend with HTTP API endpoints, HTML/CSS/JS frontend with glass-morphism design, floating animations, score tracking, and mobile responsive design.',
+      images: [
+        process.env.PUBLIC_URL + '/ttt/1.png'
+      ],
+      technologies: ['C++', 'HTML', 'CSS', 'JavaScript', 'RESTful API', 'Object-Oriented Programming', 'Makefile', 'cpp-httplib'],
+      category: 'fun',
+      github: 'https://github.com/sanajamkatel/TicTacToe-CPP',
+      demo: 'https://tictactoe-cpp.onrender.com/',
+      featured: true,
+      period: 'Aug 2025'
     }
   ], []);
 
   const filters = useMemo(() => [
     { id: 'all', label: 'All Projects' },
-    { id: 'web', label: 'Web Development' },
     { id: 'ai', label: 'AI & ML' },
-    { id: 'mobile', label: 'Mobile Apps' },
-    { id: 'game', label: 'Games' },
-    { id: 'data', label: 'Data Science' }
+    { id: 'web', label: 'Web Development' },
+    { id: 'fun', label: 'Fun Projects' }
   ], []);
 
   const filteredProjects = activeFilter === 'all' 
@@ -266,8 +278,8 @@ const Projects: React.FC = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-blue-500 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl"
                     >
-                      <ExternalLink size={16} />
-                      <span>Live Demo</span>
+                        <ExternalLink size={16} />
+                        <span>Let's Play</span>
                     </motion.a>
                   )}
                 </div>

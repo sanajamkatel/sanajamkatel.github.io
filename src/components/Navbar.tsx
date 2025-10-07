@@ -1,85 +1,30 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
-  // Close dropdown when clicking outside
-  React.useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Element;
-      if (!target.closest('.projects-dropdown')) {
-        setIsProjectsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  // Add delay before closing dropdown on mouse leave
-  const [closeTimeout, setCloseTimeout] = React.useState<NodeJS.Timeout | null>(null);
-
-  const handleMouseEnter = () => {
-    if (closeTimeout) {
-      clearTimeout(closeTimeout);
-      setCloseTimeout(null);
-    }
-    setIsProjectsDropdownOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    const timeout = setTimeout(() => {
-      setIsProjectsDropdownOpen(false);
-    }, 150); // 150ms delay
-    setCloseTimeout(timeout);
-  };
 
   // Close mobile menu when route changes
   React.useEffect(() => {
     setIsOpen(false);
-    setIsProjectsDropdownOpen(false);
   }, [location.pathname]);
 
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Experience', path: '/experience' },
-    { name: 'Projects', path: '/projects', hasDropdown: true },
+    { name: 'Projects', path: '/projects' },
     { name: 'Interests', path: '/interests' },
     { name: 'Contact', path: '/contact' },
   ];
 
-  const projectDropdownItems = [
-    { name: 'Main Projects', path: '/projects' },
-    { name: 'Fun Projects', path: '/fun-projects', external: true },
-  ];
-
-  const handleMobileProjectsClick = () => {
-    console.log('Mobile Projects clicked! Current state:', isProjectsDropdownOpen); // Debug log
-    setIsProjectsDropdownOpen(!isProjectsDropdownOpen);
-    console.log('New state will be:', !isProjectsDropdownOpen); // Debug log
-  };
-
-  const handleMobileItemClick = (path: string, external: boolean = false) => {
-    console.log('Mobile item clicked:', path, 'external:', external); // Debug log
-    
-    if (external) {
-      // For external links, open in new tab
-      window.open(path, '_blank', 'noopener,noreferrer');
-    } else {
-      // For internal links, navigate and close mobile menu
-      console.log('Navigating to:', path); // Debug log
-      navigate(path);
-    }
-    // Always close mobile menu and dropdown
+  const handleMobileItemClick = (path: string) => {
     setIsOpen(false);
-    setIsProjectsDropdownOpen(false);
+    navigate(path);
   };
 
   return (
@@ -109,75 +54,19 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <div key={item.name} className="relative">
-                {item.hasDropdown ? (
-                  <div
-                    className="projects-dropdown relative"
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
+                <Link to={item.path}>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`transition-colors duration-300 font-medium ${
+                      location.pathname === item.path
+                        ? 'text-primary'
+                        : 'text-gray-700 hover:text-primary'
+                    }`}
                   >
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setIsProjectsDropdownOpen(!isProjectsDropdownOpen)}
-                      className="text-gray-700 hover:text-primary transition-colors duration-300 font-medium flex items-center space-x-1"
-                    >
-                      <span>{item.name}</span>
-                      <ChevronDown size={16} />
-                    </motion.button>
-                    
-                    {/* Dropdown Menu */}
-                    {isProjectsDropdownOpen && (
-                      <>
-                        {/* Invisible bridge to prevent dropdown from closing */}
-                        <div className="absolute top-full left-0 w-48 h-1 bg-transparent"></div>
-                        <motion.div
-                          initial={{ opacity: 0, y: -10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          className="absolute top-full left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50"
-                        >
-                        {projectDropdownItems.map((dropdownItem) => (
-                          dropdownItem.external ? (
-                            <a
-                              key={dropdownItem.name}
-                              href={dropdownItem.path}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="block px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors duration-300"
-                              onClick={() => setIsProjectsDropdownOpen(false)}
-                            >
-                              {dropdownItem.name}
-                            </a>
-                          ) : (
-                            <Link
-                              key={dropdownItem.name}
-                              to={dropdownItem.path}
-                              className="block px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 transition-colors duration-300"
-                              onClick={() => setIsProjectsDropdownOpen(false)}
-                            >
-                              {dropdownItem.name}
-                            </Link>
-                          )
-                        ))}
-                        </motion.div>
-                      </>
-                    )}
-                  </div>
-                ) : (
-                  <Link to={item.path}>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`transition-colors duration-300 font-medium ${
-                        location.pathname === item.path
-                          ? 'text-primary'
-                          : 'text-gray-700 hover:text-primary'
-                      }`}
-                    >
-                      {item.name}
-                    </motion.button>
-                  </Link>
-                )}
+                    {item.name}
+                  </motion.button>
+                </Link>
               </div>
             ))}
           </div>
@@ -185,9 +74,10 @@ const Navbar: React.FC = () => {
           {/* Mobile menu button */}
           <div className="md:hidden">
             <motion.button
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-primary"
+              className="text-gray-700 hover:text-primary transition-colors duration-300"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </motion.button>
@@ -197,66 +87,21 @@ const Navbar: React.FC = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white border-t"
           >
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
                 <div key={item.name}>
-                  {item.hasDropdown ? (
-                    <div>
-                      <button
-                        onClick={handleMobileProjectsClick}
-                        className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 flex items-center justify-between"
-                      >
-                        <span>{item.name}</span>
-                        <ChevronDown size={16} className={`transform transition-transform ${isProjectsDropdownOpen ? 'rotate-180' : ''}`} />
-                      </button>
-                      {isProjectsDropdownOpen && (
-                        <div className="ml-4 space-y-1">
-                          {projectDropdownItems.map((dropdownItem) => (
-                            dropdownItem.external ? (
-                              <a
-                                key={dropdownItem.name}
-                                href={dropdownItem.path}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block w-full text-left px-3 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 text-sm"
-                                onClick={() => {
-                                  setIsOpen(false);
-                                  setIsProjectsDropdownOpen(false);
-                                }}
-                              >
-                                {dropdownItem.name}
-                              </a>
-                            ) : (
-                              <Link
-                                key={dropdownItem.name}
-                                to={dropdownItem.path}
-                                className="block w-full text-left px-3 py-2 text-gray-600 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300 text-sm"
-                                onClick={() => {
-                                  setIsOpen(false);
-                                  setIsProjectsDropdownOpen(false);
-                                }}
-                              >
-                                {dropdownItem.name}
-                              </Link>
-                            )
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <Link
-                      to={item.path}
-                      className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300"
-                      onClick={() => handleMobileItemClick(item.path)}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
+                  <Link
+                    to={item.path}
+                    className="block w-full text-left px-3 py-2 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-md transition-colors duration-300"
+                    onClick={() => handleMobileItemClick(item.path)}
+                  >
+                    {item.name}
+                  </Link>
                 </div>
               ))}
             </div>
@@ -267,4 +112,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;

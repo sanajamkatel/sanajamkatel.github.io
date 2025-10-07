@@ -23,8 +23,8 @@ const Hero: React.FC = () => {
 
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/files/SadhanaJamkatel_Resume.pdf';
-    link.download = 'SadhanaJamkatel_Resume.pdf';
+    link.href = '/Jamkatel_Sana_Resume.pdf';
+    link.download = 'Jamkatel_Sana_Resume.pdf';
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();

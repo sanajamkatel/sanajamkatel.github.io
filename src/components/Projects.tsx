@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 
 
 const Projects: React.FC = () => {
@@ -11,6 +11,22 @@ const Projects: React.FC = () => {
   const projects = useMemo(() => [
     {
       id: 1,
+      title: 'Predictive Maintenance System',
+      description: 'Developed an ML-powered predictive maintenance system achieving 96% accuracy in predicting engine failures using Random Forest trained on 876K sensor readings. Engineered 30+ temporal features from 4 raw sensors, improving baseline model accuracy from 75% to 96%. Implemented SMOTE for class imbalance and cost-sensitive learning, achieving 95% recall rate with 4% false alarm rate. Built Flask REST API with O(1) prediction complexity achieving <1ms response time and interactive Streamlit dashboard with real-time visualizations and fleet analytics.',
+      images: [
+        process.env.PUBLIC_URL + '/PredictiveMaintenanceSystem/1.png',
+        process.env.PUBLIC_URL + '/PredictiveMaintenanceSystem/2.png',
+        process.env.PUBLIC_URL + '/PredictiveMaintenanceSystem/3.png'
+      ],
+      technologies: ['Python', 'scikit-learn', 'Flask', 'Streamlit', 'Random Forest', 'SMOTE', 'Data Analytics', 'REST API', 'Kaggle Dataset'],
+      category: 'ai',
+      github: 'https://github.com/sanajamkatel/Predictive-Maintenance-System',
+      demo: 'https://sanajamkatel.github.io/Predictive-Maintenance-System/',
+      featured: true,
+      period: 'Sep 2025'
+    },
+    {
+      id: 2,
       title: 'Medical Recommendation System',
       description: 'Developed a healthcare-focused system predicting diseases based on symptoms using ML models that predicts diseases based on symptoms and suggests treatments using machine learning models such as SVC, Random Forest, and Gradient Boosting. Built and deployed RESTful APIs with Flask for backend processing and designed a responsive web interface and AI-powered symptom matching and Google Search API to fetch up-to-date treatment suggestions.',
       images: [
@@ -26,7 +42,7 @@ const Projects: React.FC = () => {
       period: 'Jan 2025 - Feb 2025'
     },
     {
-      id: 2,
+      id: 3,
       title: 'Twitter Clone',
       description: 'Developed a full-stack Twitter clone designed for good user experience that supports user authentication, tweet posting, and social interactions like following/unfollowing, using technologies such as React, Vite, Node.js, Express.js, MongoDB, and Cloudinary. Designed and implemented RESTful APIs for secure user authentication, profile management, and data storage, utilizing JWT for token-based authentication, bcrypt for password encryption, and custom middleware for efficient routing.',
       images: [
@@ -228,8 +244,8 @@ const Projects: React.FC = () => {
                   ))}
                 </div>
 
-                {/* GitHub Link */}
-                <div className="flex justify-center">
+                {/* GitHub and Demo Links */}
+                <div className="flex justify-center gap-3">
                   <motion.a
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
@@ -241,6 +257,19 @@ const Projects: React.FC = () => {
                     <Github size={16} />
                     <span>View Code</span>
                   </motion.a>
+                  {project.demo && (
+                    <motion.a
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-blue-500 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                      <ExternalLink size={16} />
+                      <span>Live Demo</span>
+                    </motion.a>
+                  )}
                 </div>
               </div>
             </motion.div>

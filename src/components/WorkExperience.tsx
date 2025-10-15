@@ -20,9 +20,7 @@ const WorkExperience: React.FC = () => {
               technologies: ['Docusaurus', 'MDX', 'GitHub Actions', 'AWS S3', 'CloudFront', 'IAM', 'TypeScript', 'OCLIF', 'JumpCloud SSO'],
               achievements: [
                 'Built an internal documentation site using Docusaurus (MDX, charts, search), used by 30+ engineers. Deployed to GitHub Pages and integrated CI/CD with GitHub Actions to automate updates and version control. Reduced average search time from 30 minutes to under a minute',
-                'Set up infrastructure on AWS (S3, CloudFront, IAM) with access control via JumpCloud SSO. Improved site security and availability while supporting a fast-moving engineering team',
-                'Developed a CLI tool in TypeScript with OCLIF for automating login, role-based access, and token generation for AWS and databases. Reduced setup time by 70% and made onboarding easier',
-                'Automated CLI doc publishing using OCLIF\'s markdown generator and GitHub Actions, removing the need for manual updates and keeping docs accurate with every release'
+                'Created a documentation site for a CLI tool (used for automating login, role-based access, and token generation for AWS and databases) that auto-generates and updates files using OCLIF\'s markdown generator and GitHub Actions.'
               ],
               images: [
                 { src: process.env.PUBLIC_URL + '/aeropay/screenshot.png', alt: 'Documentation Site', type: 'Website' },

@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
                                       <motion.a
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
-                          href="https://github.com/Sadhanajx10"
+                          href="https://github.com/sanajamkatel"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-gray-700 hover:text-hot-pink transition-colors duration-300"

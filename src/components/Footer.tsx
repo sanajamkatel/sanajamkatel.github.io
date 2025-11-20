@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
             <motion.a
               whileHover={{ scale: 1.1, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              href="https://github.com/Sadhanajx10"
+              href="https://github.com/sanajamkatel"
               target="_blank"
               rel="noopener noreferrer"
               className="text-pink-600 hover:text-pink-800 transition-colors duration-300"

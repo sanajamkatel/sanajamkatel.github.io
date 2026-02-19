@@ -22,12 +22,12 @@ const About: React.FC = () => {
               year: 'Expected May 2027',
               concentration: 'Concentration in Ethical Leadership',
               minor: 'Minor in Economics',
-              gpa: 'GPA: 3.808',
+              gpa: 'GPA: 3.87',
               coursework: [
                 'Python', 'Data Structures', 'Discrete Structures', 
                 'Computer Organization and Design', 'Software Development', 
                 'Website Development', 'Data Mining', 'Calculus I & II', 
-                'Database Systems'
+                'Database Systems', 'Computer Network and Security', 'Algorithms and Design'
               ]
             }
           ];
@@ -102,9 +102,7 @@ const About: React.FC = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      window.open('/Jamkatel_Sana_Resume.pdf', '_blank');
-                    }}
+                    onClick={() => window.open(`${process.env.PUBLIC_URL || ''}/Jamkatel_Sana_Resume(Latest).pdf`, '_blank')}
                     className="bg-hot-pink text-white px-6 py-3 rounded-lg font-medium hover:bg-hot-pink/80 transition-colors duration-300 flex items-center justify-center space-x-2 border-2 border-hot-pink hover:border-hot-pink/80"
                   >
                     <Download size={20} />
@@ -190,9 +188,14 @@ const About: React.FC = () => {
                   <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
                     {/* Profile Photo */}
                     <img
-                      src={process.env.PUBLIC_URL + "/profilepic.JPEG"}
+                      src={`${process.env.PUBLIC_URL || ''}/Jamkatel_Sana.JPG`}
                       alt="Sadhana Jamkatel"
                       className="w-60 h-60 rounded-full object-cover"
+                      onError={(e) => {
+                        const t = e.currentTarget;
+                        t.onerror = null;
+                        t.src = `${process.env.PUBLIC_URL || ''}/profilepic.JPEG`;
+                      }}
                     />
                   </div>
                 </div>

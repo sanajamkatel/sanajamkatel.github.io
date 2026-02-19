@@ -1,18 +1,57 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
+type ProjectEntry = {
+  id: number;
+  title: string;
+  bullets: string[];
+  images: string[];
+  technologies: string[];
+  category: string;
+  github: string;
+  featured: boolean;
+  period: string;
+  demo?: string;
+};
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
 
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
 
-  const projects = useMemo(() => [
+  const projects = useMemo<ProjectEntry[]>(() => [
+    {
+      id: 5,
+      title: 'Care Equity | Full-Stack Healthcare Bias Tracker',
+      bullets: [
+        'Code2040 Hackathon — Engineered a full-stack Next.js and Node.js application to surface maternal healthcare inequities.',
+        'Built responsive hospital discovery tool, interactive data visualizations (Recharts), and anonymous reporting system.',
+        'Designed REST API with Express and MongoDB; implemented same-origin API proxy for cross-browser and mobile compatibility.',
+        'Deployed on Vercel (Frontend) and Render (Backend) with environment-based routing and keep-awake strategies for high availability.'
+      ],
+      images: [
+        `${process.env.PUBLIC_URL || ''}/care-equity/1.png`,
+        `${process.env.PUBLIC_URL || ''}/care-equity/2.png`,
+        `${process.env.PUBLIC_URL || ''}/care-equity/3.png`,
+        `${process.env.PUBLIC_URL || ''}/care-equity/4.png`
+      ],
+      technologies: ['Next.js', 'Node.js', 'Express', 'MongoDB', 'Recharts', 'REST API', 'Vercel', 'Render'],
+      category: 'web',
+      github: 'https://github.com/sanajamkatel/Care-Equity',
+      demo: 'https://care-equity.vercel.app/',
+      featured: true,
+      period: 'Feb 2026'
+    },
     {
       id: 1,
       title: 'Predictive Maintenance System',
-      description: 'Developed an ML-powered predictive maintenance system achieving 96% accuracy in predicting engine failures using Random Forest trained on 876K sensor readings. Engineered 30+ temporal features from 4 raw sensors, improving baseline model accuracy from 75% to 96%. Implemented SMOTE for class imbalance and cost-sensitive learning, achieving 95% recall rate with 4% false alarm rate. Built Flask REST API with O(1) prediction complexity achieving <1ms response time and interactive Streamlit dashboard with real-time visualizations and fleet analytics.',
+      bullets: [
+        'Developed ML-powered predictive maintenance system achieving 96% accuracy (Random Forest on 876K sensor readings).',
+        'Engineered 30+ temporal features from 4 raw sensors, improving baseline accuracy from 75% to 96%.',
+        'Implemented SMOTE for class imbalance and cost-sensitive learning; achieved 95% recall with 4% false alarm rate.',
+        'Built Flask REST API with O(1) prediction complexity (<1ms response) and Streamlit dashboard with real-time fleet analytics.'
+      ],
       images: [
         process.env.PUBLIC_URL + '/PredictiveMaintenanceSystem/1.png',
         process.env.PUBLIC_URL + '/PredictiveMaintenanceSystem/2.png',
@@ -28,7 +67,11 @@ const Projects: React.FC = () => {
     {
       id: 2,
       title: 'Medical Recommendation System',
-      description: 'Developed a healthcare-focused system predicting diseases based on symptoms using ML models that predicts diseases based on symptoms and suggests treatments using machine learning models such as SVC, Random Forest, and Gradient Boosting. Built and deployed RESTful APIs with Flask for backend processing and designed a responsive web interface and AI-powered symptom matching and Google Search API to fetch up-to-date treatment suggestions.',
+      bullets: [
+        'Developed healthcare system predicting diseases from symptoms using SVC, Random Forest, and Gradient Boosting.',
+        'Built and deployed RESTful APIs with Flask for backend processing.',
+        'Designed responsive web interface with AI-powered symptom matching and Google Search API for up-to-date treatment suggestions.'
+      ],
       images: [
         process.env.PUBLIC_URL + '/projects/ML/careconnect%20cover.png',
         process.env.PUBLIC_URL + '/projects/ML/careconnect-1st.png',
@@ -44,7 +87,11 @@ const Projects: React.FC = () => {
     {
       id: 3,
       title: 'Twitter Clone',
-      description: 'Developed a full-stack Twitter clone designed for good user experience that supports user authentication, tweet posting, and social interactions like following/unfollowing, using technologies such as React, Vite, Node.js, Express.js, MongoDB, and Cloudinary. Designed and implemented RESTful APIs for secure user authentication, profile management, and data storage, utilizing JWT for token-based authentication, bcrypt for password encryption, and custom middleware for efficient routing.',
+      bullets: [
+        'Developed full-stack Twitter clone with user authentication, tweet posting, and following/unfollowing (React, Vite, Node.js, Express, MongoDB, Cloudinary).',
+        'Designed and implemented RESTful APIs for secure authentication, profile management, and data storage.',
+        'Utilized JWT for token-based auth, bcrypt for password encryption, and custom middleware for efficient routing.'
+      ],
       images: [
         process.env.PUBLIC_URL + '/projects/twitter/cover.png',
         process.env.PUBLIC_URL + '/projects/twitter/dashboard.png',
@@ -59,7 +106,10 @@ const Projects: React.FC = () => {
     {
       id: 4,
       title: 'Tic-Tac-Toe Game',
-      description: 'Developed two implementations of Tic-Tac-Toe showcasing different programming paradigms: a C++ console version with object-oriented design and a C++ web server with HTML frontend. The console version features 2D array board representation, input validation, and comprehensive win detection. The web server version includes a C++ backend with HTTP API endpoints, HTML/CSS/JS frontend with glass-morphism design, floating animations, score tracking, and mobile responsive design.',
+      bullets: [
+        'Developed two Tic-Tac-Toe implementations: C++ console (OOP, 2D array, input validation, win detection) and C++ web server with HTML frontend.',
+        'Web server: C++ backend with HTTP API endpoints; HTML/CSS/JS frontend with glass-morphism design, animations, score tracking, and mobile-responsive layout.'
+      ],
       images: [
         process.env.PUBLIC_URL + '/ttt/1.png'
       ],
@@ -240,9 +290,14 @@ const Projects: React.FC = () => {
                   )}
                 </div>
                 
-                <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  {project.description}
-                </p>
+                <ul className="text-gray-600 mb-4 text-sm leading-relaxed space-y-1.5">
+                  {project.bullets.map((point, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <ArrowRight className="text-primary mt-0.5 flex-shrink-0" size={14} />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
 
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-4">

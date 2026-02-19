@@ -72,7 +72,7 @@ const Contact: React.FC = () => {
   };
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com/Sadhanajx10', label: 'GitHub' },
+    { icon: Github, href: 'https://github.com/sanajamkatel', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com/in/sadhanajamkatel', label: 'LinkedIn' }
   ];
 

@@ -2,32 +2,47 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, Calendar, MapPin, ExternalLink, ArrowRight, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
 
+type WorkImage = { src: string; alt: string; type: string };
+type WorkEntry = {
+  id: string;
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  type: string;
+  description: string;
+  technologies: string[];
+  achievements: string[];
+  images: WorkImage[];
+  link: string | null;
+  toBeDone?: string[];
+};
 
 const WorkExperience: React.FC = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: string]: number }>({});
 
-  const workExperience = useMemo(() => [
+  const workExperience = useMemo<WorkEntry[]>(() => [
             {
               id: 'aeropay',
               title: 'DevOps Engineer Intern',
               company: 'Aeropay',
               location: 'Chicago, IL',
-              period: 'June 2025 - August 2025',
+              period: 'Jun 2025 - Aug 2025',
               type: 'internship',
-              description: 'Building internal documentation sites, setting up AWS infrastructure, and developing CLI tools for automation. Working with CI/CD pipelines and cloud technologies.',
+              description: 'Reduced documentation search time from 30 minutes to 30 seconds by building a full-stack internal documentation site; also created CLI tool documentation with auto-generated updates. Served 30+ engineers daily with GitHub Pages, CI/CD, and AWS S3 + CloudFront with JumpCloud SSO.',
               technologies: ['Docusaurus', 'MDX', 'GitHub Actions', 'AWS S3', 'CloudFront', 'IAM', 'TypeScript', 'OCLIF', 'JumpCloud SSO'],
               achievements: [
-                'Built an internal documentation site using Docusaurus (MDX, charts, search), used by 30+ engineers. Deployed to GitHub Pages and integrated CI/CD with GitHub Actions to automate updates and version control. Reduced average search time from 30 minutes to under a minute',
+                'Reduced documentation search time from 30 minutes to 30 seconds by building a full-stack internal documentation site using Docusaurus (MDX, custom charts, integrated search), serving 30+ engineers daily and hosted on GitHub Pages with automated CI/CD via GitHub Actions; also tested the site using AWS S3 + CloudFront with JumpCloud SSO access controls.',
                 'Created a documentation site for a CLI tool (used for automating login, role-based access, and token generation for AWS and databases) that auto-generates and updates files using OCLIF\'s markdown generator and GitHub Actions.'
               ],
               images: [
                 { src: process.env.PUBLIC_URL + '/aeropay/screenshot.png', alt: 'Documentation Site', type: 'Website' },
-                { src: process.env.PUBLIC_URL + '/aeropay/aeropay1.png', alt: 'Interns' },
-                { src: process.env.PUBLIC_URL + '/aeropay/2.png', alt: 'Build a Bear'},
-                { src: process.env.PUBLIC_URL + '/aeropay/IMG_9274.jpg', alt: 'Service Day '},
-                { src: process.env.PUBLIC_URL + '/aeropay/IMG_5240 2.png', alt: 'First Day' }
+                { src: process.env.PUBLIC_URL + '/aeropay/aeropay1.png', alt: 'Interns', type: 'Team' },
+                { src: process.env.PUBLIC_URL + '/aeropay/2.png', alt: 'Build a Bear', type: 'Event' },
+                { src: process.env.PUBLIC_URL + '/aeropay/IMG_9274.jpg', alt: 'Service Day', type: 'Event' },
+                { src: process.env.PUBLIC_URL + '/aeropay/IMG_5240 2.png', alt: 'First Day', type: 'Team' }
               ],
               link: null
             },
@@ -53,60 +68,18 @@ const WorkExperience: React.FC = () => {
                 { src: process.env.PUBLIC_URL + '/argonne/4.png', alt: 'Advanced HPC', type: 'Advanced' }
               ],
               link: null
-            },
-                        {
-              id: 'safari',
-              title: 'Web Developer',
-              company: 'Safari Strives',
-              location: 'Remote',
-              period: '2024 – 2025',
-              type: 'freelance',
-              description: 'Built and maintained Safari Strives\' website from the ground up, delivering custom pages, forms, and a secure donation experience.',
-              technologies: [
-                'HTML/CSS',
-                'JavaScript',
-                'React',
-                'Node.js',
-                'Netlify',
-                'Stripe (Payment Intents API)'
-              ],
-              achievements: [
-                'Built a professional React website with modular components and npm packages according to team requirements'
-              ],
-              toBeDone: [
-                'Research cost-effective payment solutions (Stripe vs PayPal vs GoFundMe vs Donorbox) for nonprofit donations',
-                'Implement secure donation flow using chosen payment processor with 3D Secure and fraud prevention',
-                'Build serverless functions (Netlify Functions) and webhooks to verify payment events and enable receipts, success/cancel routes, and audit-friendly logs',
-                'Deploy website to Netlify and configure environment variables and secret management',
-                'Design clear donation UI with suggested amounts and validation, improving usability on mobile and desktop',
-                'Implement secure donation line with enhanced fraud detection',
-                'Verify payment events with real-time webhook monitoring',
-                'End-to-end payment test mode integration for all donation flows',
-                'Generate automated weekly/monthly email reports to organization members',
-                'Add multi-currency support for international donations',
-                'Implement advanced analytics dashboard for donation tracking'
-              ],
-              images: [
-                { src: process.env.PUBLIC_URL + '/safari-website.png', alt: 'Safari Strive Website', type: 'Website' }
-              ],
-              link: null
             }
           ], []);
 
   const tabs = [
     { id: 'all', label: 'All Experience' },
     { id: 'internship', label: 'Internships' },
-    { id: 'bootcamp', label: 'Bootcamps' },
-    { id: 'freelance', label: 'Freelance' }
+    { id: 'bootcamp', label: 'Bootcamps' }
   ];
 
   const filteredExperience = activeTab === 'all' 
     ? workExperience 
     : workExperience.filter(job => job.type === activeTab);
-  
-  console.log('🔍 Current activeTab:', activeTab);
-  console.log('🔍 Filtered experience count:', filteredExperience.length);
-  console.log('🔍 Filtered experience:', filteredExperience);
 
   const nextImage = useCallback((jobId: string) => {
     const job = workExperience.find(j => j.id === jobId);
@@ -171,7 +144,7 @@ const WorkExperience: React.FC = () => {
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-2">
-            My professional journey in software development, from internships to freelance work
+            My professional journey in software development
           </p>
         </motion.div>
 
@@ -188,10 +161,7 @@ const WorkExperience: React.FC = () => {
               key={tab.id}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                console.log('🔍 Clicking tab:', tab.id);
-                setActiveTab(tab.id);
-              }}
+              onClick={() => setActiveTab(tab.id)}
               className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full font-medium transition-all duration-500 ease-in-out text-sm sm:text-base ${
                 activeTab === tab.id
                   ? 'bg-primary text-white shadow-lg'
@@ -205,13 +175,11 @@ const WorkExperience: React.FC = () => {
 
         {/* Work Experience Cards */}
         <motion.div
-          layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
           {filteredExperience.map((job, index) => (
             <motion.div
               key={job.id}
-              layout
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.2, delay: index * 0.1, ease: "easeOut" }}
@@ -338,10 +306,15 @@ const WorkExperience: React.FC = () => {
 
                 {/* Know More Button */}
                 <motion.button
+                  type="button"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={() => setExpandedJob(expandedJob === job.id ? null : job.id)}
-                  className="w-full bg-primary/10 text-primary px-4 py-2 rounded-lg font-medium hover:bg-primary/20 transition-colors duration-300 flex items-center justify-center space-x-2 mb-4"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setExpandedJob(prev => prev === job.id ? null : job.id);
+                  }}
+                  className="w-full bg-primary/10 text-primary px-4 py-2 rounded-lg font-medium hover:bg-primary/20 transition-colors duration-300 flex items-center justify-center space-x-2 mb-4 cursor-pointer"
                 >
                   <span>{expandedJob === job.id ? 'Show Less' : 'Know More'}</span>
                   {expandedJob === job.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}

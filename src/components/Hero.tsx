@@ -8,22 +8,25 @@ const Hero: React.FC = () => {
   const [showButton, setShowButton] = useState(false);
             const fullText = "HI, MY NAME IS\nSadhana Jamkatel (Sana)\nComputer Science Student, Open to Work";
   
+  const secondNewlineIndex = fullText.indexOf('\n', fullText.indexOf('\n') + 1);
+  const delayMs = currentIndex > secondNewlineIndex ? 40 : 100;
+
   useEffect(() => {
     if (currentIndex < fullText.length) {
       const timeout = setTimeout(() => {
         setDisplayText(prev => prev + fullText[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 100);
+      }, delayMs);
       return () => clearTimeout(timeout);
     } else {
-      // Show button after typing is complete
       setTimeout(() => setShowButton(true), 500);
     }
-  }, [currentIndex, fullText]);
+  }, [currentIndex, fullText, delayMs]);
 
+  const resumePath = `${process.env.PUBLIC_URL || ''}/Jamkatel_Sana_Resume(Latest).pdf`;
   const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/Jamkatel_Sana_Resume.pdf';
+    link.href = resumePath;
     link.download = 'Jamkatel_Sana_Resume.pdf';
     link.target = '_blank';
     document.body.appendChild(link);

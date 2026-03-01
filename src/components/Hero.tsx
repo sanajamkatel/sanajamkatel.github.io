@@ -23,7 +23,7 @@ const Hero: React.FC = () => {
     }
   }, [currentIndex, fullText, delayMs]);
 
-  const resumePath = `${process.env.PUBLIC_URL || ''}/Jamkatel_Sana_Resume(Latest).pdf`;
+  const resumePath = `${process.env.PUBLIC_URL || ''}/files/Jamkatel_Sana_Resume(Latest).pdf`;
   const handleDownloadResume = () => {
     const link = document.createElement('a');
     link.href = resumePath;

@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import AboutPage from './pages/About';
 import ExperiencePage from './pages/Experience';
+import ExperienceDetailPage from './pages/ExperienceDetail';
 import ProjectsPage from './pages/Projects';
 import InterestsPage from './pages/Interests';
 import ContactPage from './pages/Contact';
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/experience/:id" element={<ExperienceDetailPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/interests" element={<InterestsPage />} />
           <Route path="/contact" element={<ContactPage />} />

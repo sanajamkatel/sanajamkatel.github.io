@@ -112,9 +112,13 @@ const Contact: React.FC = () => {
           </h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-8"></div>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            I'm always open to discussing new opportunities, interesting projects, 
+            I'm always open to discussing new opportunities, interesting projects,
             or just having a chat about technology and life!
           </p>
+          <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full font-medium text-sm mt-6">
+            <span>🎓</span>
+            <span>Open to Full-Time Software Engineering roles — Graduating May 2027</span>
+          </div>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12">

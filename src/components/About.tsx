@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, GraduationCap, Heart, Download } from 'lucide-react';
+import { Code, GraduationCap, Heart, Download, FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const About: React.FC = () => {
@@ -87,7 +87,7 @@ const About: React.FC = () => {
                   As an <span className="text-hot-pink font-semibold">underrepresented woman in tech</span>, my goal is to inspire and support others from similar backgrounds so that they can excel in this space too.
                 </p>
                 <p className="text-gray-600 leading-relaxed text-lg">
-                  I'm gearing up to start my 2026 internship search, open to DevOps or Software Engineering internships.
+                  I'm graduating in May 2027 and am actively looking for full-time Software Engineering roles starting Spring 2027.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <motion.button
@@ -98,16 +98,28 @@ const About: React.FC = () => {
                   >
                     <span>Contact Me</span>
                   </motion.button>
-                  
+
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => window.open(`${process.env.PUBLIC_URL || ''}/files/Jamkatel_Sana_Resume(Latest).pdf`, '_blank')}
+                    onClick={() => window.open(`${process.env.PUBLIC_URL || ''}/files/Jamkatel_Sadhana_Resume2026.pdf`, '_blank')}
                     className="bg-hot-pink text-white px-6 py-3 rounded-lg font-medium hover:bg-hot-pink/80 transition-colors duration-300 flex items-center justify-center space-x-2 border-2 border-hot-pink hover:border-hot-pink/80"
                   >
                     <Download size={20} />
                     <span>View Resume</span>
                   </motion.button>
+
+                  <motion.a
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    href="https://docs.google.com/document/d/1rnC1RGxDJX6ViNxy1px8RFokrRGTb_Fx9jZvGdD1P40/edit?tab=t.0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-white text-hot-pink px-6 py-3 rounded-lg font-medium hover:bg-pale-pink transition-colors duration-300 flex items-center justify-center space-x-2 border-2 border-hot-pink"
+                  >
+                    <FileText size={20} />
+                    <span>Resume (Google Doc)</span>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>

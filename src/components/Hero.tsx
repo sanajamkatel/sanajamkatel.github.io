@@ -6,7 +6,7 @@ const Hero: React.FC = () => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showButton, setShowButton] = useState(false);
-            const fullText = "HI, MY NAME IS\nSadhana Jamkatel (Sana)\nComputer Science Student, Open to Work";
+            const fullText = "HI, MY NAME IS\nSadhana Jamkatel (Sana)\nOpen to Full-Time SWE Roles — May 2027 Grad";
   
   const secondNewlineIndex = fullText.indexOf('\n', fullText.indexOf('\n') + 1);
   const delayMs = currentIndex > secondNewlineIndex ? 40 : 100;
@@ -23,11 +23,11 @@ const Hero: React.FC = () => {
     }
   }, [currentIndex, fullText, delayMs]);
 
-  const resumePath = `${process.env.PUBLIC_URL || ''}/files/Jamkatel_Sana_Resume(Latest).pdf`;
+  const resumePath = `${process.env.PUBLIC_URL || ''}/files/Jamkatel_Sadhana_Resume2026.pdf`;
   const handleDownloadResume = () => {
     const link = document.createElement('a');
     link.href = resumePath;
-    link.download = 'Jamkatel_Sana_Resume.pdf';
+    link.download = 'Jamkatel_Sadhana_Resume2026.pdf';
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();

@@ -1,75 +1,12 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin, ExternalLink, ArrowRight, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
-
-type WorkImage = { src: string; alt: string; type: string };
-type WorkEntry = {
-  id: string;
-  title: string;
-  company: string;
-  location: string;
-  period: string;
-  type: string;
-  description: string;
-  technologies: string[];
-  achievements: string[];
-  images: WorkImage[];
-  link: string | null;
-  toBeDone?: string[];
-};
+import { Link } from 'react-router-dom';
+import { Briefcase, Calendar, MapPin, ExternalLink, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { workExperience } from '../data/workExperience';
 
 const WorkExperience: React.FC = () => {
   const [activeTab, setActiveTab] = useState('all');
-  const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: string]: number }>({});
-
-  const workExperience = useMemo<WorkEntry[]>(() => [
-            {
-              id: 'aeropay',
-              title: 'DevOps Engineer Intern',
-              company: 'Aeropay',
-              location: 'Chicago, IL',
-              period: 'Jun 2025 - Aug 2025',
-              type: 'internship',
-              description: 'Reduced documentation search time from 30 minutes to 30 seconds by building a full-stack internal documentation site; also created CLI tool documentation with auto-generated updates. Served 30+ engineers daily with GitHub Pages, CI/CD, and AWS S3 + CloudFront with JumpCloud SSO.',
-              technologies: ['Docusaurus', 'MDX', 'GitHub Actions', 'AWS S3', 'CloudFront', 'IAM', 'TypeScript', 'OCLIF', 'JumpCloud SSO'],
-              achievements: [
-                'Reduced documentation search time from 30 minutes to 30 seconds by building a full-stack internal documentation site using Docusaurus (MDX, custom charts, integrated search), serving 30+ engineers daily and hosted on GitHub Pages with automated CI/CD via GitHub Actions; also tested the site using AWS S3 + CloudFront with JumpCloud SSO access controls.',
-                'Created a documentation site for a CLI tool (used for automating login, role-based access, and token generation for AWS and databases) that auto-generates and updates files using OCLIF\'s markdown generator and GitHub Actions.'
-              ],
-              images: [
-                { src: process.env.PUBLIC_URL + '/aeropay/screenshot.png', alt: 'Documentation Site', type: 'Website' },
-                { src: process.env.PUBLIC_URL + '/aeropay/aeropay1.png', alt: 'Interns', type: 'Team' },
-                { src: process.env.PUBLIC_URL + '/aeropay/2.png', alt: 'Build a Bear', type: 'Event' },
-                { src: process.env.PUBLIC_URL + '/aeropay/IMG_9274.jpg', alt: 'Service Day', type: 'Event' },
-                { src: process.env.PUBLIC_URL + '/aeropay/IMG_5240 2.png', alt: 'First Day', type: 'Team' }
-              ],
-              link: null
-            },
-            {
-              id: 'argonne',
-              title: 'High Performance Computing Bootcamp Participant',
-              company: 'Argonne National Laboratory',
-              location: 'Lemont, IL',
-              period: 'August 2025',
-              type: 'bootcamp',
-              description: 'Participated in an intensive bootcamp focused on supercomputing systems and their applications in high-performance computing.',
-              technologies: ['Large Language Models (LLM)', 'Retrieval-Augmented Generation (RAG)', 'LangChain', 'Gemini', 'Data Visualization', 'Machine Learning', 'AI for Scientific Computing'],
-              achievements: [
-                'Gained hands-on exposure to supercomputing systems like Aurora and their applications in HPC',
-                'Participated in workshops on data visualization, machine learning, and AI for scientific computing',
-                'Collaborated on a team project to build an interactive HPC chatbot, using both RAG-based and non-RAG approaches with LangChain and Gemini'
-              ],
-              images: [
-                { src: process.env.PUBLIC_URL + '/argonne/IMG_8658 2.jpg', alt: 'Argonne Bootcamp', type: 'Bootcamp' },
-                { src: process.env.PUBLIC_URL + '/argonne/1.png', alt: 'Aurora Systems', type: 'System' },
-                { src: process.env.PUBLIC_URL + '/argonne/2.png', alt: 'Supercomputing Session', type: 'Learning' },
-                { src: process.env.PUBLIC_URL + '/argonne/3.png', alt: 'HPC Workshop', type: 'Workshop' },
-                { src: process.env.PUBLIC_URL + '/argonne/4.png', alt: 'Advanced HPC', type: 'Advanced' }
-              ],
-              link: null
-            }
-          ], []);
 
   const tabs = [
     { id: 'all', label: 'All Experience' },
@@ -305,76 +242,15 @@ const WorkExperience: React.FC = () => {
                 <p className="text-gray-600 mb-4 leading-relaxed">{job.description}</p>
 
                 {/* Know More Button */}
-                <motion.button
-                  type="button"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setExpandedJob(prev => prev === job.id ? null : job.id);
-                  }}
-                  className="w-full bg-primary/10 text-primary px-4 py-2 rounded-lg font-medium hover:bg-primary/20 transition-colors duration-300 flex items-center justify-center space-x-2 mb-4 cursor-pointer"
-                >
-                  <span>{expandedJob === job.id ? 'Show Less' : 'Know More'}</span>
-                  {expandedJob === job.id ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                </motion.button>
-
-                {/* Expanded Content */}
-                {expandedJob === job.id && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-4"
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                  <Link
+                    to={`/experience/${job.id}`}
+                    className="w-full bg-primary/10 text-primary px-4 py-2 rounded-lg font-medium hover:bg-primary/20 transition-colors duration-300 flex items-center justify-center space-x-2 cursor-pointer"
                   >
-
-
-                    {/* Technologies */}
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-700 mb-2">Key Technologies:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {job.technologies.map((tech, techIndex) => (
-                          <span
-                            key={techIndex}
-                            className="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-medium"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Achievements */}
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-700 mb-2">Key Achievements:</h4>
-                      <ul className="space-y-2">
-                        {job.achievements.map((achievement, achievementIndex) => (
-                          <li key={achievementIndex} className="flex items-start space-x-2 text-sm text-gray-600">
-                            <ArrowRight className="text-primary mt-0.5 flex-shrink-0" size={14} />
-                            <span>{achievement}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* To Be Done */}
-                    {job.toBeDone && (
-                      <div>
-                        <h4 className="text-sm font-semibold text-gray-700 mb-2 mt-4">To Be Done:</h4>
-                        <ul className="space-y-2">
-                          {job.toBeDone.map((item, itemIndex) => (
-                            <li key={itemIndex} className="flex items-start space-x-2 text-sm text-gray-500">
-                              <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
-                              <span>{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </motion.div>
-                )}
+                    <span>Know More</span>
+                    <ArrowRight size={16} />
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
           ))}

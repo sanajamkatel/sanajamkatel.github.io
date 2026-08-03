@@ -26,7 +26,7 @@ const WorkExperience: React.FC = () => {
         [jobId]: ((prev[jobId] || 0) + 1) % job.images.length
       }));
     }
-  }, [workExperience]);
+  }, []);
 
   const prevImage = useCallback((jobId: string) => {
     const job = workExperience.find(j => j.id === jobId);
@@ -36,7 +36,7 @@ const WorkExperience: React.FC = () => {
         [jobId]: prev[jobId] === 0 ? job.images.length - 1 : (prev[jobId] || 0) - 1
       }));
     }
-  }, [workExperience]);
+  }, []);
 
   // Auto-slide effect
   useEffect(() => {
@@ -63,7 +63,7 @@ const WorkExperience: React.FC = () => {
     return () => {
       Object.values(intervals).forEach(interval => clearInterval(interval));
     };
-  }, [filteredExperience, workExperience]);
+  }, [filteredExperience]);
 
   return (
     <section id="work-experience" className="section-padding bg-gray-50 relative">

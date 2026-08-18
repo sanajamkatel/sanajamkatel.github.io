@@ -41,8 +41,8 @@ const Contact: React.FC = () => {
       // );
       
       // EmailJS setup complete!
-              await emailjs.send(
-        'service_rID-TNGGD5AvAQdx4', // Your EmailJS service ID
+      await emailjs.send(
+        'service_rg9wvpa', // Your EmailJS service ID
         'template_cvqefo7', // Your EmailJS template ID
         {
           from_name: formData.name,

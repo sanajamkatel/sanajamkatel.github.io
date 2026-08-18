@@ -25,6 +25,8 @@ export type WorkEntry = {
   link: string | null;
   toBeDone?: string[];
   deepDive?: DeepDiveSection[];
+  writeupUrl?: string;
+  writeupLabel?: string;
 };
 
 export const workExperience: WorkEntry[] = [
@@ -44,10 +46,17 @@ export const workExperience: WorkEntry[] = [
       'Resolved complex backend edge cases across microservices—redesigning configuration update logic, fixing search pagination defects, and resolving 500 server crashes in production.'
     ],
     images: [
+      { src: process.env.PUBLIC_URL + '/skai/chatbot-conversation.png', alt: 'skAi Ops Assistant — VIP, phone update & fraud lockdown', type: 'Screenshot' },
+      { src: process.env.PUBLIC_URL + '/skai/lockdown.png', alt: 'skAi — Fraud Lockdown Flow', type: 'Screenshot' },
+      { src: process.env.PUBLIC_URL + '/skai/declined-history.png', alt: 'skAi — Decline History Lookup', type: 'Screenshot' },
+      { src: process.env.PUBLIC_URL + '/skai/update-phone.png', alt: 'skAi — Phone Number Update', type: 'Screenshot' },
+      { src: process.env.PUBLIC_URL + '/skai/slack-alert.png', alt: 'skAi — Slack Audit Notification', type: 'Screenshot' },
       { src: 'https://sanajamkatel.github.io/aeropay-swe-intern/SkyeAgentDemo.mov', alt: 'Skye AI Agent Demo', type: 'Video' },
       { src: 'https://sanajamkatel.github.io/aeropay-swe-intern/ODFIMOdal.mov', alt: 'ODFI Config Modal Demo', type: 'Video' }
     ],
     link: null,
+    writeupUrl: process.env.PUBLIC_URL + '/skai/skai-briefing.html',
+    writeupLabel: 'Read the full skAi technical briefing',
     deepDive: [
       {
         title: 'Generative AI Operations Agent & Orchestration Engine',

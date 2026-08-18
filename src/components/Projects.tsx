@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink, FileText, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
 type ProjectEntry = {
   id: number;
@@ -9,11 +9,14 @@ type ProjectEntry = {
   images: string[];
   technologies: string[];
   category: string;
-  github: string;
+  github?: string;
   featured: boolean;
   period: string;
   demo?: string;
+  writeup?: string;
 };
+
+const isVideoAsset = (src: string) => /\.(mp4|webm|mov)$/i.test(src);
 
 const Projects: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -21,6 +24,29 @@ const Projects: React.FC = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
 
   const projects = useMemo<ProjectEntry[]>(() => [
+    {
+      id: 6,
+      title: 'skAi | AI Ops Assistant (Admin Chatbot)',
+      bullets: [
+        'Built a Claude-powered chat assistant embedded in the Aeropay Admin Portal that lets ops perform account actions — lookups, phone updates, VIP/reputation changes, fraud lockdowns — via plain-English requests instead of multi-page forms.',
+        'Designed a two-gate authorization system: a hardcoded high-risk keyword check runs before classification and a second check runs after, so a write action never executes unless both the raw message and Claude\'s resolved action agree it\'s safe.',
+        'Orchestrated a 4-step fraud lockdown state machine (block reputation → void pending transactions → remove bank accounts → disable bank linking) with a live progress card and mid-run cancellation.',
+        'Every write action stamps an audit trail and fires a Slack notification; the widget fails closed via a dev-only environment gate so it never renders outside local/dev.'
+      ],
+      images: [
+        process.env.PUBLIC_URL + '/skai/chatbot-conversation.png',
+        process.env.PUBLIC_URL + '/skai/lockdown.png',
+        process.env.PUBLIC_URL + '/skai/declined-history.png',
+        process.env.PUBLIC_URL + '/skai/update-phone.png',
+        process.env.PUBLIC_URL + '/skai/slack-alert.png',
+        process.env.PUBLIC_URL + '/skai/live-demo.mov'
+      ],
+      technologies: ['Claude API', 'Python', 'Flask', 'React', 'REST APIs', 'Slack API', 'AWS'],
+      category: 'ai',
+      writeup: process.env.PUBLIC_URL + '/skai/skai-briefing.html',
+      featured: true,
+      period: 'Summer 2026'
+    },
     {
       id: 5,
       title: 'Care Equity | Full-Stack Healthcare Bias Tracker',
@@ -227,11 +253,19 @@ const Projects: React.FC = () => {
             >
               {/* Project Image Carousel */}
               <div className="relative overflow-hidden h-52">
-                <img
-                  src={project.images[currentImageIndex[project.id] || 0]}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                />
+                {isVideoAsset(project.images[currentImageIndex[project.id] || 0]) ? (
+                  <video
+                    src={project.images[currentImageIndex[project.id] || 0]}
+                    controls
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={project.images[currentImageIndex[project.id] || 0]}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  />
+                )}
                 
                 {/* Navigation Arrows */}
                 <button
@@ -311,19 +345,21 @@ const Projects: React.FC = () => {
                   ))}
                 </div>
 
-                {/* GitHub and Demo Links */}
-                <div className="flex justify-center gap-3">
-                  <motion.a
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-gray-700 hover:to-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
-                  >
-                    <Github size={16} />
-                    <span>View Code</span>
-                  </motion.a>
+                {/* GitHub, Demo, and Writeup Links */}
+                <div className="flex flex-wrap justify-center gap-3">
+                  {project.github && (
+                    <motion.a
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-2 bg-gradient-to-r from-gray-800 to-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-gray-700 hover:to-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                      <Github size={16} />
+                      <span>View Code</span>
+                    </motion.a>
+                  )}
                   {project.demo && (
                     <motion.a
                       whileHover={{ scale: 1.05, y: -2 }}
@@ -335,6 +371,19 @@ const Projects: React.FC = () => {
                     >
                         <ExternalLink size={16} />
                         <span>Let's Play</span>
+                    </motion.a>
+                  )}
+                  {project.writeup && (
+                    <motion.a
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      href={project.writeup}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center space-x-2 bg-gradient-to-r from-hot-pink to-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                        <FileText size={16} />
+                        <span>Technical Deep Dive</span>
                     </motion.a>
                   )}
                 </div>

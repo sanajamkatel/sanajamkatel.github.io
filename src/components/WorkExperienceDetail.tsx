@@ -239,6 +239,18 @@ const WorkExperienceDetail: React.FC = () => {
                   </div>
                 ))}
               </div>
+
+              {job.writeupUrl && (
+                <a
+                  href={job.writeupUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 mt-6 text-primary font-medium hover:text-primary-dark transition-colors"
+                >
+                  <span>{job.writeupLabel || 'Read the full technical write-up'}</span>
+                  <ArrowRight size={16} />
+                </a>
+              )}
             </div>
           )}
 

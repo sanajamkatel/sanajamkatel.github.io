@@ -45,11 +45,11 @@ const Contact: React.FC = () => {
         'service_rg9wvpa', // Your EmailJS service ID
         'template_cvqefo7', // Your EmailJS template ID
         {
-          from_name: formData.name,
-          from_email: formData.email,
-          reply_to: formData.email,
-          subject: formData.subject,
+          name: formData.name,
+          email: formData.email,
+          title: formData.subject,
           message: formData.message,
+          time: new Date().toLocaleString(),
           to_email: 'sadhanajamkatel0010@gmail.com'
         },
         'rID-TNGGD5AvAQdx4' // Your EmailJS public key

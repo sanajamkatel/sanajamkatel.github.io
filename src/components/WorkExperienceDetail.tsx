@@ -94,20 +94,26 @@ const WorkExperienceDetail: React.FC = () => {
 
                   {job.images.length > 1 && (
                     <>
-                      <button
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        transition={{ duration: 0.15, ease: 'easeOut' }}
                         onClick={() =>
                           setCurrentImageIndex((prev) => (prev === 0 ? job.images.length - 1 : prev - 1))
                         }
-                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-700 p-2 rounded-full shadow-lg transition-all duration-300"
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-700 p-2 rounded-full shadow-lg transition-colors duration-200"
                       >
                         <ChevronLeft size={20} />
-                      </button>
-                      <button
+                      </motion.button>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                        transition={{ duration: 0.15, ease: 'easeOut' }}
                         onClick={() => setCurrentImageIndex((prev) => (prev + 1) % job.images.length)}
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-700 p-2 rounded-full shadow-lg transition-all duration-300"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-700 p-2 rounded-full shadow-lg transition-colors duration-200"
                       >
                         <ChevronRight size={20} />
-                      </button>
+                      </motion.button>
                     </>
                   )}
                 </div>
@@ -115,10 +121,13 @@ const WorkExperienceDetail: React.FC = () => {
                 {job.images.length > 1 && (
                   <div className="flex justify-center space-x-2 mt-3">
                     {job.images.map((_, index) => (
-                      <button
+                      <motion.button
                         key={index}
+                        whileHover={{ scale: 1.3 }}
+                        whileTap={{ scale: 0.9 }}
+                        transition={{ duration: 0.15, ease: 'easeOut' }}
                         onClick={() => setCurrentImageIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        className={`w-2 h-2 rounded-full transition-colors duration-200 ${
                           currentImageIndex === index ? 'bg-primary scale-125' : 'bg-white/50 hover:bg-white/80'
                         }`}
                       />
@@ -128,10 +137,13 @@ const WorkExperienceDetail: React.FC = () => {
 
                 <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 mt-3">
                   {job.images.map((image, index) => (
-                    <button
+                    <motion.button
                       key={index}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.97 }}
+                      transition={{ duration: 0.15, ease: 'easeOut' }}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`aspect-video rounded-md overflow-hidden border-2 transition-all ${
+                      className={`aspect-video rounded-md overflow-hidden border-2 transition-colors duration-200 ${
                         currentImageIndex === index ? 'border-primary' : 'border-transparent opacity-70 hover:opacity-100'
                       }`}
                     >
@@ -140,7 +152,7 @@ const WorkExperienceDetail: React.FC = () => {
                       ) : (
                         <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
                       )}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               </div>

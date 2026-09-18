@@ -31,7 +31,7 @@ const Projects: React.FC = () => {
         [projectId]: ((prev[projectId] || 0) + 1) % project.images.length
       }));
     }
-  }, [projects]);
+  }, []);
 
   const prevImage = useCallback((projectId: number) => {
     const project = projects.find(p => p.id === projectId);
@@ -41,7 +41,7 @@ const Projects: React.FC = () => {
         [projectId]: prev[projectId] === 0 ? project.images.length - 1 : (prev[projectId] || 0) - 1
       }));
     }
-  }, [projects]);
+  }, []);
 
   // Auto-slide carousel every 5 seconds
   useEffect(() => {

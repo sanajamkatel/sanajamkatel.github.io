@@ -6,6 +6,7 @@ import AboutPage from './pages/About';
 import ExperiencePage from './pages/Experience';
 import ExperienceDetailPage from './pages/ExperienceDetail';
 import ProjectsPage from './pages/Projects';
+import ProjectDetailPage from './pages/ProjectDetail';
 import InterestsPage from './pages/Interests';
 import ContactPage from './pages/Contact';
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/experience" element={<ExperiencePage />} />
           <Route path="/experience/:id" element={<ExperienceDetailPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path="/interests" element={<InterestsPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>

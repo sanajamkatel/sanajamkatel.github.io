@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Briefcase, Calendar, MapPin, ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import VideoPlayer from './VideoPlayer';
 import { workExperience } from '../data/workExperience';
 
 const WorkExperienceDetail: React.FC = () => {
@@ -70,27 +71,35 @@ const WorkExperienceDetail: React.FC = () => {
             {job.images.length > 0 ? (
               <div className="bg-gradient-to-br from-pale-pink to-baby-pink rounded-xl p-3">
                 <div className="relative">
-                  <div className="aspect-video bg-white rounded-lg overflow-hidden relative">
-                    {isVideo(job.images[currentImageIndex].src) ? (
-                      <video
+                  {isVideo(job.images[currentImageIndex].src) ? (
+                    <div className="relative">
+                      <VideoPlayer
+                        key={job.images[currentImageIndex].src}
                         src={job.images[currentImageIndex].src}
-                        controls
-                        className="w-full h-full object-cover"
+                        containerClassName="rounded-lg overflow-hidden w-full"
                       />
-                    ) : (
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 pointer-events-none">
+                        <div className="text-white">
+                          <div className="text-sm font-medium">{job.images[currentImageIndex].alt}</div>
+                          <div className="text-xs opacity-80">{job.images[currentImageIndex].type}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="aspect-video bg-white rounded-lg overflow-hidden relative">
                       <img
                         src={job.images[currentImageIndex].src}
                         alt={job.images[currentImageIndex].alt}
                         className="w-full h-full object-cover"
                       />
-                    )}
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                      <div className="text-white">
-                        <div className="text-sm font-medium">{job.images[currentImageIndex].alt}</div>
-                        <div className="text-xs opacity-80">{job.images[currentImageIndex].type}</div>
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                        <div className="text-white">
+                          <div className="text-sm font-medium">{job.images[currentImageIndex].alt}</div>
+                          <div className="text-xs opacity-80">{job.images[currentImageIndex].type}</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  )}
 
                   {job.images.length > 1 && (
                     <>
@@ -148,7 +157,7 @@ const WorkExperienceDetail: React.FC = () => {
                       }`}
                     >
                       {isVideo(image.src) ? (
-                        <video src={image.src} className="w-full h-full object-cover" muted />
+                        <video src={image.src} className="w-full h-full object-contain bg-black" muted />
                       ) : (
                         <img src={image.src} alt={image.alt} className="w-full h-full object-cover" />
                       )}
